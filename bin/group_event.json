@@ -1,0 +1,7 @@
+{
+	"group_event": {
+		"name": "Event 1",
+		"duration": 4,
+		"description": "We are using __Markdown__ now!"
+	}
+}

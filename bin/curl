@@ -1,0 +1,33 @@
+list_users() 
+{
+	curl -v -X POST -H "Content-Type: application/json" -d @bin/user.json \
+		 http://localhost:3000/users
+}
+
+list_group_events() 
+{
+	curl -v -X POST -H "Content-Type: application/json" -d @bin/user.json \
+		 http://localhost:3000/group_events
+}
+
+create_user_group_event()
+{
+	curl -v -X POST -H "Content-Type: application/json" -d @bin/group_event.json \
+		 http://localhost:3000/users/1/group_events
+}
+
+update_user_group_event()
+{
+	curl -v -X PATCH -H "Content-Type: application/json" -d @bin/update_group_event.json \
+		 http://localhost:3000/users/1/group_events/1
+}
+
+delete_user_group_event()
+{
+	curl -v -X DELETE -H "Content-Type: application/json" -d @bin/update_group_event.json \
+		 http://localhost:3000/users/1/group_events/1
+}
+
+$1
+
+	

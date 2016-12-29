@@ -1,0 +1,681 @@
+  [1m[35m (107.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (114.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateGroupEvents (20161225052427)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "group_events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "duration" integer, "start_time" datetime, "end_time" varchar, "name" varchar, "description" text, "location" varchar, "draft" boolean, "removed" boolean, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_group_events_on_user_id" ON "group_events" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161225052427"]]
+  [1m[35m (138.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20161225052532)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161225052532"]]
+  [1m[35m (141.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-12-25 05:25:52 UTC], ["updated_at", 2016-12-25 05:25:52 UTC]]
+  [1m[35m (95.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_group_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_group_events_on_user_id' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_group_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_group_events_on_user_id' AND type='index'
+[0m
+Started GET "/group_events" for 127.0.0.1 at 2016-12-25 11:23:33 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEventsController#index as */*
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+Completed 200 OK in 16ms (Views: 1.2ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/group_events" for 127.0.0.1 at 2016-12-25 11:25:51 +0530
+Processing by GroupEventsController#create as */*
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: group_event):
+  
+app/controllers/group_events_controller.rb:49:in `group_event_params'
+app/controllers/group_events_controller.rb:18:in `create'
+Started POST "/users" for 127.0.0.1 at 2016-12-25 11:27:21 +0530
+Processing by UsersController#create as */*
+Completed 400 Bad Request in 2ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: user):
+  
+app/controllers/users_controller.rb:49:in `user_params'
+app/controllers/users_controller.rb:18:in `create'
+Started POST "/users" for 127.0.0.1 at 2016-12-25 11:37:11 +0530
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"first user"}}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "first user"], ["created_at", 2016-12-25 06:07:11 UTC], ["updated_at", 2016-12-25 06:07:11 UTC]]
+  [1m[35m (116.1ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 128ms (Views: 1.1ms | ActiveRecord: 117.9ms)
+
+
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/users" for 127.0.0.1 at 2016-12-25 11:54:31 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/users/1/group_events" for 127.0.0.1 at 2016-12-25 12:07:36 +0530
+Processing by GroupEventsController#create as */*
+  Parameters: {"group_event"=>{"name"=>"Event 1", "duration"=>4}, "user_id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "name", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["duration", 4], ["name", "Event 1"], ["user_id", 1], ["created_at", 2016-12-25 06:37:47 UTC], ["updated_at", 2016-12-25 06:37:47 UTC]]
+  [1m[35m (135.5ms)[0m  [1m[36mcommit transaction[0m
+Completed 500 Internal Server Error in 269ms (ActiveRecord: 138.2ms)
+
+
+  
+NoMethodError (undefined method `group_event_url' for #<GroupEventsController:0x007fd61c011e28>
+Did you mean?  group_events_url):
+  
+app/controllers/group_events_controller.rb:22:in `create'
+Started POST "/users/1/group_events" for 127.0.0.1 at 2016-12-25 12:09:45 +0530
+Processing by GroupEventsController#create as */*
+  Parameters: {"group_event"=>{"name"=>"Event 1", "duration"=>4}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "name", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["duration", 4], ["name", "Event 1"], ["user_id", 1], ["created_at", 2016-12-25 06:39:45 UTC], ["updated_at", 2016-12-25 06:39:45 UTC]]
+  [1m[35m (105.3ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 124ms (Views: 0.5ms | ActiveRecord: 106.7ms)
+
+
+  [1m[36mGroupEvent Load (1.9ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (23.1ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", 2016-12-25 09:18:27 UTC], ["updated_at", 2016-12-25 09:18:27 UTC]]
+  [1m[35m (110.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["duration", 3], ["user_id", 2], ["created_at", 2016-12-25 09:18:53 UTC], ["updated_at", 2016-12-25 09:18:53 UTC]]
+  [1m[35m (201.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "group_events" SET "draft" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["draft", false], ["updated_at", 2016-12-25 09:19:13 UTC], ["id", 3]]
+  [1m[35m (143.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", true]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", false]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", true]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", false]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", true]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", false]]
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+  [1m[36mGroupEvent Load (1.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", :environment]]
+DEPRECATION WARNING: Passing #original_exception is deprecated and has no effect. Exceptions will automatically capture the original exception. (called from load at /home/cleartranscripts/.rbenv/versions/2.3.1/bin/rake:23)
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+  [1m[35m (108.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (110.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateGroupEvents (20161225052427)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "group_events" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "duration" integer, "start_time" datetime, "end_time" varchar, "name" varchar, "description" text, "location" varchar, "draft" boolean DEFAULT 't', "removed" boolean, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_group_events_on_user_id" ON "group_events" ("user_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161225052427"]]
+  [1m[35m (123.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20161225052532)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20161225052532"]]
+  [1m[35m (130.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-12-25 09:30:47 UTC], ["updated_at", 2016-12-25 09:30:47 UTC]]
+  [1m[35m (92.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_group_events_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_group_events_on_user_id' AND type='index'
+[0m
+  [1m[36mGroupEvent Load (1.8ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", false]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."draft" = ?[0m  [["draft", true]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", 2016-12-25 09:31:32 UTC], ["updated_at", 2016-12-25 09:31:32 UTC]]
+  [1m[35m (114.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "draft", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["duration", 5], ["draft", false], ["user_id", 1], ["created_at", 2016-12-25 09:32:13 UTC], ["updated_at", 2016-12-25 09:32:13 UTC]]
+  [1m[35m (97.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "group_events" SET "description" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["description", "An h1 header"], ["updated_at", 2016-12-25 09:33:40 UTC], ["id", 1]]
+  [1m[35m (110.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "users" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", 2016-12-25 12:57:10 UTC], ["updated_at", 2016-12-25 12:57:10 UTC]]
+  [1m[35m (113.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "draft", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["duration", 5], ["draft", false], ["user_id", 2], ["created_at", 2016-12-25 12:57:29 UTC], ["updated_at", 2016-12-25 12:57:29 UTC]]
+  [1m[35m (132.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "group_events" SET "description" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["description", "all is well"], ["updated_at", 2016-12-25 13:11:28 UTC], ["id", 2]]
+  [1m[35m (117.9ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/users" for 127.0.0.1 at 2016-12-25 19:17:29 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Completed 200 OK in 9ms (Views: 3.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/group_events" for 127.0.0.1 at 2016-12-25 19:17:38 +0530
+Processing by GroupEventsController#index as */*
+  [1m[36mGroupEvent Load (0.6ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+Completed 500 Internal Server Error in 25ms (ActiveRecord: 1.5ms)
+
+
+  
+ArgumentError (comparison of DateTime with nil failed):
+  
+app/models/group_event.rb:31:in `>'
+app/models/group_event.rb:31:in `block in <class:GroupEvent>'
+app/controllers/group_events_controller.rb:8:in `index'
+Started GET "/group_events" for 127.0.0.1 at 2016-12-25 19:18:44 +0530
+Processing by GroupEventsController#index as */*
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events"[0m
+Completed 200 OK in 17ms (Views: 12.0ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/1/group_events/1" for 127.0.0.1 at 2016-12-25 19:20:19 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/1/group_events/1"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/users/1/group_events/1" for 127.0.0.1 at 2016-12-25 19:20:41 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 49ms (Views: 17.3ms | ActiveRecord: 1.4ms)
+
+
+Started POST "/users/1/group_events" for 127.0.0.1 at 2016-12-25 19:21:29 +0530
+Processing by GroupEventsController#create as */*
+  Parameters: {"group_event"=>{"name"=>"Event 1", "duration"=>4, "description"=>"We are using __Markdown__ now!"}, "user_id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.2ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "name", "description", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["duration", 4], ["name", "Event 1"], ["description", "We are using __Markdown__ now!"], ["user_id", 1], ["created_at", 2016-12-25 13:51:29 UTC], ["updated_at", 2016-12-25 13:51:29 UTC]]
+  [1m[35m (81.2ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 92ms (Views: 0.7ms | ActiveRecord: 82.6ms)
+
+
+Started GET "/users/1/group_events/3" for 127.0.0.1 at 2016-12-25 19:22:02 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.3ms)
+
+
+Started PATCH "/users/1/group_events" for 127.0.0.1 at 2016-12-25 19:27:12 +0530
+  
+ActionController::RoutingError (No route matches [PATCH] "/users/1/group_events"):
+  
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/users/1/group_events/3" for 127.0.0.1 at 2016-12-25 19:27:50 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 39ms (Views: 14.3ms | ActiveRecord: 2.8ms)
+
+
+Started PATCH "/users/1/group_events/1" for 127.0.0.1 at 2016-12-25 19:28:08 +0530
+Processing by GroupEventsController#update as */*
+  Parameters: {"group_event"=>{"name"=>"Event 2", "duration"=>8, "description"=>"We are using __Markdown__ now!"}, "user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[33mUPDATE "group_events" SET "description" = ?, "duration" = ?, "name" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["description", "We are using __Markdown__ now!"], ["duration", 8], ["name", "Event 2"], ["updated_at", 2016-12-25 13:58:08 UTC], ["id", 1]]
+  [1m[35m (115.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "group_events" SET "duration" = ?, "name" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["duration", 8], ["name", "Event 2"], ["updated_at", 2016-12-25 13:58:08 UTC], ["id", 3]]
+  [1m[35m (96.5ms)[0m  [1m[36mcommit transaction[0m
+Completed 200 OK in 229ms (Views: 1.0ms | ActiveRecord: 213.7ms)
+
+
+Started DELETE "/users/1/group_events/1" for 127.0.0.1 at 2016-12-25 19:30:29 +0530
+Processing by GroupEventsController#destroy as */*
+  Parameters: {"group_event"=>{"name"=>"Event 2", "duration"=>8, "description"=>"We are using __Markdown__ now!"}, "user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 500 Internal Server Error in 26ms (ActiveRecord: 1.2ms)
+
+
+  
+NoMethodError (undefined method `removed=' for #<GroupEvent::ActiveRecord_Associations_CollectionProxy:0x00564e1ae0df08>):
+  
+app/controllers/group_events_controller.rb:39:in `destroy'
+Started DELETE "/users/1/group_events/1" for 127.0.0.1 at 2016-12-25 19:32:22 +0530
+Processing by GroupEventsController#destroy as */*
+  Parameters: {"group_event"=>{"name"=>"Event 2", "duration"=>8, "description"=>"We are using __Markdown__ now!"}, "user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.3ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 500 Internal Server Error in 62396ms (ActiveRecord: 1.5ms)
+
+
+  
+NoMethodError (undefined method `removed=' for #<GroupEvent::ActiveRecord_Associations_CollectionProxy:0x00564e18e64198>):
+  
+app/controllers/group_events_controller.rb:40:in `destroy'
+Started DELETE "/users/1/group_events/1" for 127.0.0.1 at 2016-12-25 19:33:38 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEventsController#destroy as */*
+  Parameters: {"group_event"=>{"name"=>"Event 2", "duration"=>8, "description"=>"We are using __Markdown__ now!"}, "user_id"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.5ms)[0m  [1m[33mUPDATE "group_events" SET "description" = ?, "removed" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["description", "<p>We are using <strong>Markdown</strong> now!</p>\n"], ["removed", true], ["updated_at", 2016-12-25 14:03:44 UTC], ["id", 1]]
+  [1m[35m (104.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "group_events" SET "description" = ?, "removed" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["description", "<p>We are using <strong>Markdown</strong> now!</p>\n"], ["removed", true], ["updated_at", 2016-12-25 14:03:44 UTC], ["id", 3]]
+  [1m[35m (97.9ms)[0m  [1m[36mcommit transaction[0m
+Completed 204 No Content in 5962ms (ActiveRecord: 205.7ms)
+
+
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:52:26 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 33ms (Views: 10.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:53:37 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 42ms (Views: 17.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:53:58 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:54:01 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 8ms (Views: 4.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:54:08 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 33ms (Views: 9.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:54:10 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:54:32 +0530
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 35ms (Views: 14.2ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/users/1/group_events/show_publishable" for 127.0.0.1 at 2016-12-25 19:55:59 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEventsController#show as */*
+  Parameters: {"user_id"=>"1", "id"=>"show_publishable"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+Completed 200 OK in 32ms (Views: 9.8ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/1//show_publishable" for 127.0.0.1 at 2016-12-25 19:57:05 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  
+AbstractController::ActionNotFound (The action 'show_publishable' could not be found for UsersController):
+  
+actionpack (5.0.1) lib/abstract_controller/base.rb:121:in `process'
+actionpack (5.0.1) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.1) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+activerecord (5.0.1) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/users/1/show_publishable" for 127.0.0.1 at 2016-12-25 19:57:09 +0530
+  
+AbstractController::ActionNotFound (The action 'show_publishable' could not be found for UsersController):
+  
+actionpack (5.0.1) lib/abstract_controller/base.rb:121:in `process'
+actionpack (5.0.1) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.1) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+activerecord (5.0.1) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/users/1/show_publishable" for 127.0.0.1 at 2016-12-25 19:57:11 +0530
+  
+AbstractController::ActionNotFound (The action 'show_publishable' could not be found for UsersController):
+  
+actionpack (5.0.1) lib/abstract_controller/base.rb:121:in `process'
+actionpack (5.0.1) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.1) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+activerecord (5.0.1) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/users/1/show_publishable" for 127.0.0.1 at 2016-12-25 19:57:39 +0530
+  
+AbstractController::ActionNotFound (The action 'show_publishable' could not be found for UsersController):
+  
+actionpack (5.0.1) lib/abstract_controller/base.rb:121:in `process'
+actionpack (5.0.1) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.1) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+rack (2.0.1) lib/rack/etag.rb:25:in `call'
+rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.1) lib/rack/head.rb:12:in `call'
+activerecord (5.0.1) lib/active_record/migration.rb:553:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.1) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.1) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.1) lib/rails/engine.rb:522:in `call'
+puma (3.6.2) lib/puma/configuration.rb:225:in `call'
+puma (3.6.2) lib/puma/server.rb:578:in `handle_request'
+puma (3.6.2) lib/puma/server.rb:415:in `process_client'
+puma (3.6.2) lib/puma/server.rb:275:in `block in run'
+puma (3.6.2) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+Started GET "/users/1/show_publishable" for 127.0.0.1 at 2016-12-25 20:02:50 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#show_publishable as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mGroupEvent Load (0.5ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ? AND "group_events"."removed" = ?[0m  [["user_id", 1], ["removed", false]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ? AND "group_events"."removed" = ?[0m  [["user_id", 1], ["removed", false]]
+Completed 200 OK in 1037865ms (Views: 0.5ms | ActiveRecord: 1.7ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "test"], ["created_at", 2016-12-25 23:12:05 UTC], ["updated_at", 2016-12-25 23:12:05 UTC]]
+  [1m[35m (78.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "group_events" ("duration", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["duration", 5], ["user_id", 3], ["created_at", 2016-12-25 23:12:11 UTC], ["updated_at", 2016-12-25 23:12:11 UTC]]
+  [1m[35m (67.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "group_events" WHERE "group_events"."id" = ?[0m  [["id", 4]]
+  [1m[35m (76.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.1ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "group_events" WHERE "group_events"."id" = ?[0m  [["id", 3]]
+  [1m[35m (107.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started DELETE "/users/2/group_events/2" for 127.0.0.1 at 2016-12-26 04:46:43 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by GroupEventsController#destroy as */*
+  Parameters: {"group_event"=>{"name"=>"Event 2", "duration"=>8, "description"=>"We are using __Markdown__ now!"}, "user_id"=>"2", "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mGroupEvent Load (0.4ms)[0m  [1m[34mSELECT "group_events".* FROM "group_events" WHERE "group_events"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.7ms)[0m  [1m[33mUPDATE "group_events" SET "description" = ?, "removed" = ?, "updated_at" = ? WHERE "group_events"."id" = ?[0m  [["description", "<p>all is well</p>\n"], ["removed", true], ["updated_at", 2016-12-25 23:16:55 UTC], ["id", 2]]
+  [1m[35m (134.6ms)[0m  [1m[36mcommit transaction[0m
+Completed 204 No Content in 11088ms (ActiveRecord: 138.2ms)
+
+
+  [1m[36mGroupEvent Load (0.2ms)[0m  [1m[34mSELECT  "group_events".* FROM "group_events" ORDER BY "group_events"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started POST "/users" for 127.0.0.1 at 2016-12-30 04:41:00 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"first user"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "first user"], ["created_at", 2016-12-29 23:11:00 UTC], ["updated_at", 2016-12-29 23:11:00 UTC]]
+  [1m[35m (69.6ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 80ms (Views: 1.2ms | ActiveRecord: 71.2ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2016-12-30 04:48:59 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by UsersController#create as */*
+  Parameters: {"user"=>{"name"=>"first user"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "first user"], ["created_at", 2016-12-29 23:19:00 UTC], ["updated_at", 2016-12-29 23:19:00 UTC]]
+  [1m[35m (92.3ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 103ms (Views: 1.3ms | ActiveRecord: 93.9ms)
+
+
